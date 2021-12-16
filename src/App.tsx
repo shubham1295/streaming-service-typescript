@@ -1,0 +1,18 @@
+import { HomePage } from './containers/homepage/Homepage';
+import { SearchResult } from './containers/searchResult/SearchResult';
+import { StreamPage } from './containers/streamPage/StreamPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/search/:keyword' element={<SearchResult />} />
+        <Route path='/stream/:id' element={<StreamPage />} />
+        <Route path='/stream' element={<StreamPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
