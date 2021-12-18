@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import { Card } from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ResultsEntity } from "../../interface/getTrendingMoviesInterface";
@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 
 type CarouselProps = {
   movies: ResultsEntity[];
+  title?: string;
 };
 
-const Carousel = ({ movies }: CarouselProps) => {
-  const baseUrlPoster = "https://image.tmdb.org/t/p/original/";
+const Carousel = ({ movies, title }: CarouselProps) => {
+  const baseUrlPoster = "https://image.tmdb.org/t/p/w342/";
   var settings = {
     dots: true,
     infinite: false,
@@ -47,8 +48,8 @@ const Carousel = ({ movies }: CarouselProps) => {
     ],
   };
   return (
-    <div>
-      <h2> Trending </h2>
+    <div style={{ padding: "20px" }}>
+      <h2>{title || ""}</h2>
       <Slider {...settings}>
         {movies.map((movie: ResultsEntity) => (
           <Link
@@ -56,18 +57,13 @@ const Carousel = ({ movies }: CarouselProps) => {
               pathname: `/stream/${movie.id}`,
             }}
           >
-            <Card key={movie.id}>
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "200px",
-                  overflowX: "hidden",
-                }}
-                src={`${baseUrlPoster}/${movie.poster_path}`}
-                alt={movie.title}
+            <Card key={movie.id} style={{ height: "400px", width: "270px" }}>
+              <CardMedia
+                component="img"
+                image={`${baseUrlPoster}/${movie.poster_path}`}
               />
-              <h3>{movie.title}</h3>
             </Card>
+            <h3>{movie.title}</h3>
           </Link>
         ))}
       </Slider>
