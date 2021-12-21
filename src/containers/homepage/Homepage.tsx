@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CardGrid from "../../components/cardGrid/CardGrid";
@@ -27,7 +27,7 @@ export const HomePage = () => {
   }, []);
   console.log(trendingMovies, "trending movies");
   return (
-    <div>
+    <Container>
       <h1>Homepage</h1>
       <TextField
         label="Search Movie"
@@ -39,6 +39,6 @@ export const HomePage = () => {
       <hr />
       <h1>Trending</h1>
       <CardGrid movies={trendingMovies} />
-    </div>
+    </Container>
   );
 };
