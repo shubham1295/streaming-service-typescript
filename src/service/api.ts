@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { featureMoviesInterface } from '../interface/featureMoviesInterface';
 import { getMovieInterface } from '../interface/getMovieInterface';
 import { getSearchInterface } from '../interface/getSearchInterface';
 import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterface';
@@ -19,7 +20,7 @@ export const getSearch = (keyword: string): Promise<getSearchInterface> => {
   });
 };
 
-//
+//get movie api
 export const getMovie = (id: string | number): Promise<getMovieInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -38,6 +39,18 @@ export const getTrendingMovies = (
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(`${baseUrl}movie/trendingMovies?page=${page || 1}`);
+      resolve(res.data);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+// featured api
+export const getFeaturedMovies = (): Promise<featureMoviesInterface> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${baseUrl}/featured`);
       resolve(res.data);
     } catch (err) {
       reject(err);
