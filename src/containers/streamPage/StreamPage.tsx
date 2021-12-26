@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Player from '../../components/player/Player';
-import { getMovieInterface } from '../../interface/getMovieInterface';
-import { getMovie } from '../../service/api';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Player from "../../components/player/Player";
+import { getMovieInterface } from "../../interface/getMovieInterface";
+import { getMovie } from "../../service/api";
 
 export const StreamPage = () => {
   const { id } = useParams();
@@ -12,7 +14,6 @@ export const StreamPage = () => {
     try {
       const res = await getMovie(id as number | string);
       setMovieData(res);
-      console.log(res, 'movieData');
     } catch (err) {
       console.log(err);
     }
@@ -25,8 +26,11 @@ export const StreamPage = () => {
 
   return (
     <div>
-      <Player streamUrl={movieData?.url} />
-      <h2>{movieData?.title}</h2>
+      <Header />
+      <div className="movie-items" style={{ padding: "10%" }}>
+        <Player streamUrl={movieData?.url} />
+      </div>
+      <Footer />
     </div>
   );
 };
