@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import Row from '../../components/row/Row';
-import { getSearch } from '../../service/api';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import Footer from "../../components/footer/Footer";
+import GridDisplay from "../../components/gridDisplay/GridDisplay";
+import Header from "../../components/header/Header";
+import { getSearch } from "../../service/api";
 
 export const SearchResult = () => {
   const { keyword } = useParams();
   const [search, setSearch] = useState([] as any);
-
-  const handleMovieData = (data: any) => {
-    console.log(data, 'Movie data');
-  };
 
   const fetchSerachData = async () => {
     try {
@@ -27,8 +25,11 @@ export const SearchResult = () => {
 
   return (
     <div>
-      <h1>Search Page : {keyword}</h1>
-      <Row movies={search} handleMovieData={handleMovieData} />
+      <Header />
+      <div style={{ paddingTop: "10%" }} className="movie-items">
+        <GridDisplay title={`Search Results for ${keyword}`} movies={search} />
+      </div>
+      <Footer />
     </div>
   );
 };
