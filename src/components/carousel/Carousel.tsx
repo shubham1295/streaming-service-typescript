@@ -48,8 +48,7 @@ const Carousel = ({ movies, title }: CarouselProps) => {
     ],
   };
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>{title || ""}</h2>
+    <div style={{ padding: "10%", paddingBottom: "0px" }}>
       <Slider {...settings}>
         {movies.map((movie: ResultsEntity) => (
           <Link

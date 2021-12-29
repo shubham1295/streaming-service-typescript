@@ -1,19 +1,14 @@
-import { Button, Container, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CardGrid from "../../components/cardGrid/CardGrid";
 import Carousel from "../../components/carousel/Carousel";
 import { getFeaturedMovies, getTrendingMovies } from "../../service/api";
+import Footer from "../../components/footer/Footer";
+import GridDisplay from "../../components/gridDisplay/GridDisplay";
+import Header from "../../components/header/Header";
 
 export const HomePage = () => {
-  const [searchKeyword, setSearchKeyword] = useState("");
+  // const [searchKeyword, setSearchKeyword] = useState("");
   const [trendingMovies, setTrendingMovies] = useState([] as any);
   const [featuredMovies, setFeaturedMovies] = useState([] as any);
-  const navigate = useNavigate();
-
-  const handleGotoSearch = () => {
-    navigate(`/search/${searchKeyword}`);
-  };
 
   const fetchTrendingMovies = async () => {
     const response = await getTrendingMovies();
@@ -25,20 +20,22 @@ export const HomePage = () => {
   useEffect(() => {
     fetchTrendingMovies();
   }, []);
-  console.log(trendingMovies, "trending movies");
   return (
-    <Container>
-      <h1>Homepage</h1>
-      <TextField
-        label="Search Movie"
-        variant="outlined"
-        onChange={(e) => setSearchKeyword(e.target.value)}
-      />
-      <Button onClick={handleGotoSearch}>Search</Button>
-      <Carousel title={"Featured"} movies={featuredMovies} />
+    <div>
+      <Header />
+      <div className="movie-items" style={{ paddingTop: "5%" }}>
+        <Carousel title={"Featured"} movies={featuredMovies} />
+      </div>
+
+      {/* <CustomCarausel movies={featuredMovies} /> */}
+
+      <GridDisplay title={"pop movies"} movies={trendingMovies} />
+      <Footer />
+
+      {/* <Carousel title={"Featured"} movies={featuredMovies} />
       <hr />
       <h1>Trending</h1>
-      <CardGrid movies={trendingMovies} />
-    </Container>
+      <CardGrid movies={trendingMovies} /> */}
+    </div>
   );
 };
