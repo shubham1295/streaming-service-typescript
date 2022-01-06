@@ -18,7 +18,9 @@ const GridDisplay = (props: any) => {
                 <Link
                   key={movie.id}
                   to={{
-                    pathname: `/stream/${movie.id}`,
+                    pathname: `/stream/${props.source || movie.media_type}/${
+                      movie.id
+                    }`,
                   }}
                 >
                   <div className="movie-item-style-2 movie-item-style-1">
@@ -42,6 +44,28 @@ const GridDisplay = (props: any) => {
                   </div>
                 </Link>
               ))}
+            </div>
+          </div>
+          <div className="col-md-4 col-sm-12 col-xs-12">
+            <div className="sidebar">
+              <div className="searh-form">
+                <h4 className="sb-title">Ads</h4>
+                <div className="ads">
+                  <iframe
+                    title="ad"
+                    data-aa="1889116"
+                    src="//ad.a-ads.com/1889116?size=336x280"
+                    style={{
+                      width: "336px",
+                      height: "280px",
+                      border: "0px",
+                      padding: "0",
+                      overflow: "hidden",
+                      backgroundColor: "red",
+                    }}
+                  ></iframe>
+                </div>
+              </div>
             </div>
           </div>
         </div>

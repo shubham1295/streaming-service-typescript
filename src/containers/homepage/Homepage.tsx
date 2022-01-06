@@ -28,15 +28,13 @@ export const HomePage = () => {
         <Carousel title={"Featured"} movies={featuredMovies} />
       </div>
 
-      {/* <CustomCarausel movies={featuredMovies} /> */}
-
-      <GridDisplay title={"pop movies"} movies={trendingMovies} />
+      {/* trending movies */}
+      <GridDisplay
+        title={"pop movies"}
+        movies={trendingMovies}
+        source={"movie"}
+      />
       <Footer />
-
-      {/* <Carousel title={"Featured"} movies={featuredMovies} />
-      <hr />
-      <h1>Trending</h1>
-      <CardGrid movies={trendingMovies} /> */}
     </div>
   );
 };
