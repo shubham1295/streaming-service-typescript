@@ -14,7 +14,7 @@ type CarouselProps = {
 const Carousel = ({ movies, title }: CarouselProps) => {
   const baseUrlPoster = "https://image.tmdb.org/t/p/w342/";
   var settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
@@ -48,7 +48,7 @@ const Carousel = ({ movies, title }: CarouselProps) => {
     ],
   };
   return (
-    <div style={{ padding: "10%", paddingBottom: "0px" }}>
+    <div style={{ padding: "2%"}}>
       <Slider {...settings}>
         {movies.map((movie: ResultsEntity) => (
           <Link
@@ -56,13 +56,13 @@ const Carousel = ({ movies, title }: CarouselProps) => {
               pathname: `/stream/${movie.id}`,
             }}
           >
-            <Card key={movie.id} style={{ height: "400px", width: "270px" }}>
-              <CardMedia
+            <Card key={movie.id} style={{ backgroundColor: "#020d18", boxShadow: "none"}}>
+              <CardMedia style={{ height: "400px", width: "270px", margin: "auto"}}
                 component="img"
                 image={`${baseUrlPoster}/${movie.poster_path}`}
               />
             </Card>
-            <h3>{movie.title}</h3>
+            <h3 style={{ color: "white", textAlign: "center"}}>{movie.title}</h3>
           </Link>
         ))}
       </Slider>
