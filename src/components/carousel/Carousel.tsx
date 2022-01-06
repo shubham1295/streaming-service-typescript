@@ -48,21 +48,27 @@ const Carousel = ({ movies, title }: CarouselProps) => {
     ],
   };
   return (
-    <div style={{ padding: "2%"}}>
+    <div style={{ padding: "5%" }}>
       <Slider {...settings}>
-        {movies.map((movie: ResultsEntity) => (
+        {movies.map((movie: any) => (
           <Link
             to={{
-              pathname: `/stream/${movie.id}`,
+              pathname: `/stream/${movie.source}/${movie.id}`,
             }}
           >
-            <Card key={movie.id} style={{ backgroundColor: "#020d18", boxShadow: "none"}}>
-              <CardMedia style={{ height: "400px", width: "270px", margin: "auto"}}
+            <Card
+              key={movie.id}
+              style={{ backgroundColor: "#020d18", boxShadow: "none" }}
+            >
+              <CardMedia
+                style={{ height: "400px", width: "270px", margin: "auto" }}
                 component="img"
                 image={`${baseUrlPoster}/${movie.poster_path}`}
               />
             </Card>
-            <h3 style={{ color: "white", textAlign: "center"}}>{movie.title}</h3>
+            <h3 style={{ color: "white", textAlign: "center" }}>
+              {movie.title}
+            </h3>
           </Link>
         ))}
       </Slider>

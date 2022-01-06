@@ -3,33 +3,99 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Player from "../../components/player/Player";
-import { getMovieInterface } from "../../interface/getMovieInterface";
-import { getMovie } from "../../service/api";
+import { getEpisodeBySeason, getMovie, getTvSeries } from "../../service/api";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  ListItemButton,
+  ListItemText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 export const StreamPage = () => {
-  const { id } = useParams();
-  const [movieData, setMovieData] = useState({} as getMovieInterface);
+  const { id, source } = useParams();
+  const [streamData, setStreamData] = useState(null as any);
+  const [season, setSeason] = useState(0);
+  const [episode, setEpisode] = useState([] as any);
+  const [streamUrl, setStreamUrl] = useState("" as any);
 
-  const getMovieData = async () => {
+  const getStreamData = async () => {
     try {
-      const res = await getMovie(id as number | string);
-      setMovieData(res);
+      if (source === "movie") {
+        const res = await getMovie(id as number | string);
+        setStreamData(res);
+        setStreamUrl(res.url);
+      }
+      if (source === "tv") {
+        const res = await getTvSeries(id as number | string);
+        setStreamData(res);
+        setStreamUrl(res?.seasons[0]?.episodes[0]?.url);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
+  const fetchEpisode = async (id: string, season: number) => {
+    try {
+      const res = await getEpisodeBySeason(id as number | string, season);
+      setEpisode(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setSeason(Number(event.target.value));
+    fetchEpisode(id as string, Number(event.target.value) + 1);
+  };
+
   useEffect(() => {
-    getMovieData();
+    fetchEpisode(id as string, season + 1);
+    getStreamData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       <Header />
-      <div className="movie-items" style={{ padding: "10%" }}>
-        <Player streamUrl={movieData?.url} />
-      </div>
+      {source === "movie" ? (
+        <div className="movie-items" style={{ padding: "10%" }}>
+          <Player streamUrl={streamData?.url} />
+        </div>
+      ) : (
+        <div className="movie-items" style={{ padding: "10%" }}>
+          {streamData && <Player streamUrl={streamUrl} />}
+
+          <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
+            <FormControl fullWidth style={{ backgroundColor: "grey" }}>
+              <InputLabel>Seasons</InputLabel>
+              <Select
+                value={season.toString()}
+                label="Season"
+                onChange={handleChange}
+              >
+                {streamData?.seasons.map((item: any, index: number) => (
+                  <MenuItem key={item.id} value={index}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <ListItemButton>
+              {episode?.episodes?.map((ep: any) => (
+                <ListItemText onClick={() => setStreamUrl(ep?.url)}>
+                  {ep.name}
+                </ListItemText>
+              ))}
+            </ListItemButton>
+          </Box>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
