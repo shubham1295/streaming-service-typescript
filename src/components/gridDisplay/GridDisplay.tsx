@@ -61,7 +61,7 @@ const GridDisplay = (props: any) => {
                       border: "0px",
                       padding: "0",
                       overflow: "hidden",
-                      backgroundColor: "red",
+                      backgroundColor: "transparent",
                     }}
                   ></iframe>
                 </div>
