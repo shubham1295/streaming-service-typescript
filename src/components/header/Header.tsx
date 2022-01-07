@@ -8,7 +8,7 @@ const Header = (props: any) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
   const handleGotoSearch = (searchKeyword: string) => {
-    searchKeyword.length > 0 && navigate(`/search/${searchKeyword}`);
+    searchKeyword.length > 0 && navigate(`/search/${searchKeyword}/page=1`);
   };
   return (
     <header className="ht-header">
