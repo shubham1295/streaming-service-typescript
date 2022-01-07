@@ -21,7 +21,7 @@ export const SearchResult = () => {
   useEffect(() => {
     fetchSerachData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [keyword]);
 
   return (
     <div>
