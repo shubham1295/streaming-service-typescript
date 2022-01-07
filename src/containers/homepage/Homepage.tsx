@@ -5,6 +5,7 @@ import Footer from "../../components/footer/Footer";
 import GridDisplay from "../../components/gridDisplay/GridDisplay";
 import Header from "../../components/header/Header";
 import CustomCarausel from "../../components/customCarousel/CustomCarausel";
+import Loader from "../../components/loader/Loader";
 
 export const HomePage = () => {
   // const [searchKeyword, setSearchKeyword] = useState("");
@@ -24,16 +25,23 @@ export const HomePage = () => {
   return (
     <div>
       <Header />
-      <div className="movie-items">
-        <Carousel title={"Featured"} movies={featuredMovies} />
-      </div>
+      {featuredMovies.length > 0 || trendingMovies.length > 0 ? (
+        <>
+          <div className="movie-items">
+            <Carousel title={"Featured"} movies={featuredMovies} />
+          </div>
 
-      {/* trending movies */}
-      <GridDisplay
-        title={"pop movies"}
-        movies={trendingMovies}
-        source={"movie"}
-      />
+          {/* trending movies */}
+          <GridDisplay
+            title={"pop movies"}
+            movies={trendingMovies}
+            source={"movie"}
+          />
+        </>
+      ) : (
+        <Loader />
+      )}
+
       <Footer />
     </div>
   );

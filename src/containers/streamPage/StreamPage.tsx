@@ -14,6 +14,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
+import Loader from "../../components/loader/Loader";
 
 export const StreamPage = () => {
   const { id, source } = useParams();
@@ -62,38 +63,47 @@ export const StreamPage = () => {
   return (
     <div>
       <Header />
-      {source === "movie" ? (
-        <div className="movie-items" style={{ padding: "10%" }}>
-          <Player streamUrl={streamData?.url} />
-        </div>
+      {streamData ? (
+        <>
+          {source === "movie" ? (
+            <div className="movie-items" style={{ padding: "10%" }}>
+              <Player streamUrl={streamData?.url} />
+            </div>
+          ) : (
+            <div className="movie-items" style={{ padding: "10%" }}>
+              {streamData && <Player streamUrl={streamUrl} />}
+              {episode ? (
+                <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
+                  <FormControl fullWidth style={{ backgroundColor: "grey" }}>
+                    <InputLabel>Seasons</InputLabel>
+                    <Select
+                      value={season.toString()}
+                      label="Season"
+                      onChange={handleChange}
+                    >
+                      {streamData?.seasons.map((item: any, index: number) => (
+                        <MenuItem key={item.id} value={index}>
+                          {item.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <ListItemButton>
+                    {episode?.episodes?.map((ep: any) => (
+                      <ListItemText onClick={() => setStreamUrl(ep?.url)}>
+                        {ep.name}
+                      </ListItemText>
+                    ))}
+                  </ListItemButton>
+                </Box>
+              ) : (
+                <Loader />
+              )}
+            </div>
+          )}
+        </>
       ) : (
-        <div className="movie-items" style={{ padding: "10%" }}>
-          {streamData && <Player streamUrl={streamUrl} />}
-
-          <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
-            <FormControl fullWidth style={{ backgroundColor: "grey" }}>
-              <InputLabel>Seasons</InputLabel>
-              <Select
-                value={season.toString()}
-                label="Season"
-                onChange={handleChange}
-              >
-                {streamData?.seasons.map((item: any, index: number) => (
-                  <MenuItem key={item.id} value={index}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <ListItemButton>
-              {episode?.episodes?.map((ep: any) => (
-                <ListItemText onClick={() => setStreamUrl(ep?.url)}>
-                  {ep.name}
-                </ListItemText>
-              ))}
-            </ListItemButton>
-          </Box>
-        </div>
+        <Loader />
       )}
 
       <Footer />
