@@ -22,19 +22,21 @@ const Header = (props: any) => {
         </nav>
 
         <div className="top-search">
-          <select>
-            <option value="movie">Movie</option>
-            <option value="tv">Tv Show</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Search for a movie or a TV Show. "
-            onChange={(e) => setSearchKeyword(e.target.value)}
-          />
-          <Button size="large" onClick={() => handleGotoSearch(searchKeyword)}>
-            Search
-          </Button>
-          {/* <Button onClick={handleGotoSearch}>Search</Button> */}
+          <form style={{
+                      width: "80%",
+                      margin: "0 auto",
+                      display: "flex",
+                    }}>
+            <input
+              type="text"
+              placeholder="Search for a movie or a TV Show. "
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
+            <Button type="submit" size="large" onClick={() => handleGotoSearch(searchKeyword)}>
+              Search
+            </Button>
+            {/* <Button onClick={handleGotoSearch}>Search</Button> */}
+          </form>
         </div>
       </div>
     </header>
