@@ -7,11 +7,11 @@ import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterfa
 const baseUrl = 'https://baba-streaming-service.herokuapp.com/';
 
 //search api
-export const getSearch = (keyword: string): Promise<getSearchInterface> => {
+export const getSearch = (keyword: string, page?: string | number): Promise<getSearchInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(
-        `${baseUrl}movie/searchMovie?name=${keyword}`
+        `${baseUrl}/search?name=${keyword}&page=${page || 1}`
       );
       resolve(res.data);
     } catch (err) {
@@ -51,6 +51,30 @@ export const getFeaturedMovies = (): Promise<featureMoviesInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(`${baseUrl}/featured`);
+      resolve(res.data);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+//get TV series 
+export const getTvSeries = (id: string | number): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${baseUrl}/tv/getSeason/${id}`);
+      resolve(res.data);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+// TV series get episode by season
+export const getEpisodeBySeason = (id: string | number, season?: string | number) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${baseUrl}/tv/getEpisodes/${id}?season=${season|| 1}`);
       resolve(res.data);
     } catch (err) {
       reject(err);

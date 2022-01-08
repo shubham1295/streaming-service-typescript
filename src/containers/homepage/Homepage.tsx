@@ -4,6 +4,8 @@ import { getFeaturedMovies, getTrendingMovies } from "../../service/api";
 import Footer from "../../components/footer/Footer";
 import GridDisplay from "../../components/gridDisplay/GridDisplay";
 import Header from "../../components/header/Header";
+import CustomCarausel from "../../components/customCarousel/CustomCarausel";
+import Loader from "../../components/loader/Loader";
 
 export const HomePage = () => {
   // const [searchKeyword, setSearchKeyword] = useState("");
@@ -23,19 +25,24 @@ export const HomePage = () => {
   return (
     <div>
       <Header />
-      <div className="movie-items" style={{ paddingTop: "5%" }}>
-        <Carousel title={"Featured"} movies={featuredMovies} />
-      </div>
+      {featuredMovies.length > 0 || trendingMovies.length > 0 ? (
+        <>
+          <div className="movie-items">
+            <Carousel title={"Featured"} movies={featuredMovies} />
+          </div>
 
-      {/* <CustomCarausel movies={featuredMovies} /> */}
+          {/* trending movies */}
+          <GridDisplay
+            title={"pop movies"}
+            movies={trendingMovies}
+            source={"movie"}
+          />
+        </>
+      ) : (
+        <Loader />
+      )}
 
-      <GridDisplay title={"pop movies"} movies={trendingMovies} />
       <Footer />
-
-      {/* <Carousel title={"Featured"} movies={featuredMovies} />
-      <hr />
-      <h1>Trending</h1>
-      <CardGrid movies={trendingMovies} /> */}
     </div>
   );
 };

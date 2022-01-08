@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo1.png";
 import "./style.css";
 
@@ -8,16 +8,20 @@ const Header = (props: any) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
   const handleGotoSearch = (searchKeyword: string) => {
-    navigate(`/search/${searchKeyword}`);
+    searchKeyword.length > 0 && navigate(`/search/${searchKeyword}/page=1`);
   };
   return (
     <header className="ht-header">
       <div className="container">
         <nav className="navbar navbar-default navbar-custom">
           <div className="navbar-header logo">
-            <a href="index.html">
+            <Link
+              to={{
+                pathname: `/`,
+              }}
+            >
               <img className="logo" src={logo} alt="" width="119" height="58" />
-            </a>
+            </Link>
           </div>
         </nav>
 

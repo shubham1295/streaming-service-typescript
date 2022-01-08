@@ -18,7 +18,9 @@ const GridDisplay = (props: any) => {
                 <Link
                   key={movie.id}
                   to={{
-                    pathname: `/stream/${movie.id}`,
+                    pathname: `/stream/${props.source || movie.media_type}/${
+                      movie.id
+                    }`,
                   }}
                 >
                   <div className="movie-item-style-2 movie-item-style-1">
