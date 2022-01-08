@@ -7,11 +7,11 @@ import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterfa
 const baseUrl = 'https://baba-streaming-service.herokuapp.com/';
 
 //search api
-export const getSearch = (keyword: string): Promise<getSearchInterface> => {
+export const getSearch = (keyword: string, page?: string | number): Promise<getSearchInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(
-        `${baseUrl}/search?name=${keyword}`
+        `${baseUrl}/search?name=${keyword}&page=${page || 1}`
       );
       resolve(res.data);
     } catch (err) {
