@@ -54,10 +54,10 @@ const GridDisplay = (props: any) => {
                   <iframe
                     title="ad"
                     data-aa="1889116"
-                    src="//ad.a-ads.com/1889116?size=336x280"
+                    src="//acceptable.a-ads.com/1889116"
                     style={{
-                      width: "336px",
-                      height: "280px",
+                      width: "100%",
+                      height: "100%",
                       border: "0px",
                       padding: "0",
                       overflow: "hidden",

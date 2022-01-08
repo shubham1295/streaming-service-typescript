@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/search/:keyword" element={<SearchResult />} />
+        <Route path="/search/:keyword/page=:page" element={<SearchResult />} />
         <Route path="/stream/:id" element={<StreamPage />} />
         <Route path="/stream/:source/:id" element={<StreamPage />} />
       </Routes>
