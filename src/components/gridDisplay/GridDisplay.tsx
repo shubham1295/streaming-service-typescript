@@ -2,6 +2,7 @@ import React from "react";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { Typography } from "@mui/material";
 
 const GridDisplay = (props: any) => {
   const baseUrlPoster = "https://image.tmdb.org/t/p/w185/";
@@ -34,12 +35,13 @@ const GridDisplay = (props: any) => {
                     </div>
                     <div className="mv-item-infor">
                       <h6>
-                        <a href="#">{movie.title}</a>
+                        <a href="/">{movie.title || movie.name}</a>
                       </h6>
-                      <p className="rate">
-                        <i className="ion-android-star"></i>
-                        <span>8.1</span> /10
-                      </p>
+
+                      <Typography style={{ marginTop: "-10px" }} variant="h6">
+                        {movie.release_date?.split("-")[0] ||
+                          movie.first_air_date?.split("-")[0]}
+                      </Typography>
                     </div>
                   </div>
                 </Link>
