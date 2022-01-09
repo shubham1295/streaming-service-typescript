@@ -11,7 +11,7 @@ export const getSearch = (keyword: string, page?: string | number): Promise<getS
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(
-        `${baseUrl}/search?name=${keyword}&page=${page || 1}`
+        `${baseUrl}search?name=${keyword}&page=${page || 1}`
       );
       resolve(res.data);
     } catch (err) {
