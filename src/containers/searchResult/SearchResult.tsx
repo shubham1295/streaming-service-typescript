@@ -1,10 +1,4 @@
-import {
-  Backdrop,
-  Box,
-  CircularProgress,
-  Pagination,
-  Stack,
-} from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import Footer from "../../components/footer/Footer";
@@ -32,6 +26,7 @@ export const SearchResult = () => {
 
   useEffect(() => {
     fetchSerachData(pg);
+    document.title = "Results for " + keyword;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, page]);
 

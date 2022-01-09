@@ -22,17 +22,20 @@ export const StreamPage = () => {
   const [season, setSeason] = useState(0);
   const [episode, setEpisode] = useState([] as any);
   const [streamUrl, setStreamUrl] = useState("" as any);
+  const [pageTitle, setPageTitle] = useState("" as any);
 
   const getStreamData = async () => {
     try {
       if (source === "movie") {
         const res = await getMovie(id as number | string);
         setStreamData(res);
+        setPageTitle(res.title);
         setStreamUrl(res.url);
       }
       if (source === "tv") {
         const res = await getTvSeries(id as number | string);
         setStreamData(res);
+        setPageTitle(res.name);
         setStreamUrl(res?.seasons[0]?.episodes[0]?.url);
       }
     } catch (err) {
@@ -53,12 +56,14 @@ export const StreamPage = () => {
     setSeason(Number(event.target.value));
     fetchEpisode(id as string, Number(event.target.value) + 1);
   };
-
+  console.log(streamData?.title, "resss");
   useEffect(() => {
     fetchEpisode(id as string, season + 1);
     getStreamData();
+    document.title = pageTitle;
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pageTitle]);
 
   return (
     <div>
