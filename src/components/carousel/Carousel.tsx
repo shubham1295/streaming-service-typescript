@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ResultsEntity } from "../../interface/getTrendingMoviesInterface";
 import { Link } from "react-router-dom";
+import "./style.css";
 //create carousel component
 
 type CarouselProps = {
@@ -14,12 +15,13 @@ type CarouselProps = {
 const Carousel = ({ movies, title }: CarouselProps) => {
   const baseUrlPoster = "https://image.tmdb.org/t/p/w342/";
   var settings = {
-    dots: false,
+    dots: true,   
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
+    // autoplay: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -48,13 +50,14 @@ const Carousel = ({ movies, title }: CarouselProps) => {
     ],
   };
   return (
-    <div style={{ padding: "7%" }}>
+    <div style={{ padding: "8%", overflow: 'hidden', }}>
       <Slider {...settings}>
         {movies.map((movie: any) => (
           <Link
             to={{
               pathname: `/stream/${movie.source}/${movie.id}`,
             }}
+            key={movie.id}
           >
             <Card
               key={movie.id}
@@ -66,9 +69,15 @@ const Carousel = ({ movies, title }: CarouselProps) => {
                 image={`${baseUrlPoster}/${movie.poster_path}`}
               />
             </Card>
-            <h3 style={{ color: "white", textAlign: "center" }}>
-              {movie.title}
-            </h3>
+            <div className="mv-item-infor">
+              <h6>
+                <a href="/">{movie.title || movie.name}</a>
+              </h6>
+              <p>
+                {movie.release_date?.split("-")[0] ||
+                  movie.first_air_date?.split("-")[0]}
+              </p>
+            </div>
           </Link>
         ))}
       </Slider>
