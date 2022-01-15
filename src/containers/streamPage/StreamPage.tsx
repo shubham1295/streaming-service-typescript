@@ -82,51 +82,51 @@ export const StreamPage = () => {
     <div>
       <Header />
       {streamData ? (
-        <>
-          <DisplayInfo
-            name={streamData.name || streamData.title}
-            image={streamData.poster_path}
-            description={streamData.overview}
-            id={streamData.imdbId}
-            release={streamData.first_air_date}
-          />
-          {source === "movie" ? (
-            <div className="movie-items" style={{ padding: "10%" }}>
-              <Player streamUrl={streamData?.url} />
-            </div>
-          ) : (
-            <div className="movie-items" style={{ padding: "10%" }}>
-              {streamData && <Player streamUrl={streamUrl} />}
-              {episode ? (
-                <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
-                  <FormControl fullWidth style={{ backgroundColor: "grey" }}>
-                    <InputLabel>Seasons</InputLabel>
-                    <Select
-                      value={season.toString()}
-                      label="Season"
-                      onChange={handleChange}
-                    >
-                      {streamData?.seasons.map((item: any, index: number) => (
-                        <MenuItem key={item.id} value={index}>
-                          {item.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <ListItemButton>
-                    {episode?.episodes?.map((ep: any) => (
-                      <ListItemText onClick={() => setStreamUrl(ep?.url)}>
-                        {ep.name}
-                      </ListItemText>
-                    ))}
-                  </ListItemButton>
-                </Box>
-              ) : (
-                <Loader />
-              )}
-            </div>
-          )}
-        </>
+        // <>
+        //   {source === "movie" ? (
+        //     <div className="movie-items" style={{ padding: "10%" }}>
+        //       <Player streamUrl={streamData?.url} />
+        //     </div>
+        //   ) : (
+        //     <div className="movie-items" style={{ padding: "10%" }}>
+        //       {streamData && <Player streamUrl={streamUrl} />}
+        //       {episode ? (
+        //         <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
+        //           <FormControl fullWidth style={{ backgroundColor: "grey" }}>
+        //             <InputLabel>Seasons</InputLabel>
+        //             <Select
+        //               value={season.toString()}
+        //               label="Season"
+        //               onChange={handleChange}
+        //             >
+        //               {streamData?.seasons.map((item: any, index: number) => (
+        //                 <MenuItem key={item.id} value={index}>
+        //                   {item.name}
+        //                 </MenuItem>
+        //               ))}
+        //             </Select>
+        //           </FormControl>
+        //           <ListItemButton>
+        //             {episode?.episodes?.map((ep: any) => (
+        //               <ListItemText onClick={() => setStreamUrl(ep?.url)}>
+        //                 {ep.name}
+        //               </ListItemText>
+        //             ))}
+        //           </ListItemButton>
+        //         </Box>
+        //       ) : (
+        //         <Loader />
+        //       )}
+        //     </div>
+        //   )}
+            <DisplayInfo
+              name={streamData.name || streamData.title}
+              image={streamData.poster_path}
+              description={streamData.overview}
+              id={streamData.imdbId}
+              release={streamData.first_air_date}
+            />
+        // </>
       ) : (
         <Loader />
       )}

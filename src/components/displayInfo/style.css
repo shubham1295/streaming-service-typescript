@@ -1,0 +1,23 @@
+.box {
+  display: inline-block;
+  vertical-align: top;
+  /* width: 85px;
+  height: 85px; */
+  /* background: #446c74; */
+  margin: 5px;
+}
+.content {
+  display: inline-block;
+  vertical-align: top;
+}
+.title {
+  margin: 0;
+  padding: 3px 10px 3px 0;
+}
+.title {
+  font-size: 17px;
+  font-weight: bold;
+}
+.test {
+  line-break: loose;
+}

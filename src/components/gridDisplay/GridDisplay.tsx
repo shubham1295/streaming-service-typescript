@@ -48,24 +48,23 @@ const GridDisplay = (props: any) => {
 
             <div className="row mb-5 mb-xl-8 g-5 g-xl-8 " style={{flexFlow:"wrap"}}>
             {props.movies.map((movie: any) => (
-                <Link
-                  key={movie.id}
-                  to={{
-                    pathname: `/stream/${props.source || movie.media_type}/${
-                      movie.id
-                    }`,
-                  }}
-                >
+                
                   <div className="col-6 mobile">
+                  <Link
+                    key={movie.id}
+                    to={{
+                      pathname: `/stream/${props.source || movie.media_type}/${
+                        movie.id
+                      }`,
+                    }}
+                  >
                     <div className="movie-item-style-2">
                       <img
                         src={`${baseUrlPoster}/${movie.poster_path}`}
                         alt={movie.title}
                         width="154 " height="231 "
                       />
-                      <div className="hvr-inner">
-                        <PlayArrowRoundedIcon fontSize="large" />{" "}
-                      </div>
+                      
                       <div className="mv-item-infor">
                         <h6>
                           <a href="/">{movie.title || movie.name}</a>
@@ -76,8 +75,10 @@ const GridDisplay = (props: any) => {
                         </p>
                       </div>
                     </div>
+
+                    </Link>
                   </div>
-                </Link>
+
               ))}
                   
 
