@@ -71,7 +71,7 @@ export const StreamPage = () => {
   };
 
   useEffect(() => {
-    fetchEpisode(id as string, season + 1);
+    if (source === "tv") fetchEpisode(id as string, season + 1);
     getStreamData();
     document.title = pageTitle;
 
