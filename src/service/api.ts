@@ -119,3 +119,17 @@ export const getSimilarTvSeries = (id: string | number): Promise<any> => {
     }
   });
 }
+
+export const signIn = (username: string| null | FormDataEntryValue , password: string| null | FormDataEntryValue ): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(`${BaseUrl}admin/authenticate`, {
+        username,
+        password
+      });
+      resolve(res.data.jwt);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
