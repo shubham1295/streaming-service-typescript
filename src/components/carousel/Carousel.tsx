@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ResultsEntity } from "../../interface/getTrendingMoviesInterface";
 import { Link } from "react-router-dom";
-//create carousel component
+import { ImageBaseUrl } from "../../constant/constant";
 
 type CarouselProps = {
   movies: ResultsEntity[];
@@ -12,7 +12,6 @@ type CarouselProps = {
 };
 
 const Carousel = ({ movies, title }: CarouselProps) => {
-  const baseUrlPoster = "https://image.tmdb.org/t/p/w342/";
   var settings = {
     dots: false,
     infinite: false,
@@ -63,7 +62,7 @@ const Carousel = ({ movies, title }: CarouselProps) => {
               <CardMedia
                 style={{ height: "400px", width: "270px", margin: "auto" }}
                 component="img"
-                image={`${baseUrlPoster}/${movie.poster_path}`}
+                image={`${ImageBaseUrl}/${movie.poster_path}`}
               />
             </Card>
             <h3 style={{ color: "white", textAlign: "center" }}>

@@ -1,7 +1,6 @@
-import React from "react";
+import { ImageBaseUrl } from "../../constant/constant";
 
 const CustomCarausel = (props: any) => {
-  const baseUrlPoster = "https://image.tmdb.org/t/p/w185/";
   return (
     <div className="sliderv3 movie-items">
       <div className="container">
@@ -14,7 +13,7 @@ const CustomCarausel = (props: any) => {
                 <div className="mv-img">
                   <a>
                     <img
-                      src={`${baseUrlPoster}/${movie.poster_path}`}
+                      src={`${ImageBaseUrl}/${movie.poster_path}`}
                       alt={movie.title}
                       width="285"
                       height="437"
