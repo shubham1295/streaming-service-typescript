@@ -13,6 +13,7 @@ import {
 import {
   Box,
   FormControl,
+  Grid,
   InputLabel,
   ListItemButton,
   ListItemText,
@@ -23,6 +24,7 @@ import {
 import Loader from "../../components/loader/Loader";
 import GridDisplay from "../../components/gridDisplay/GridDisplay";
 import DisplayInfo from "../../components/displayInfo/DisplayInfo";
+import { Padding } from "@mui/icons-material";
 
 export const StreamPage = () => {
   const { id, source } = useParams();
@@ -81,52 +83,64 @@ export const StreamPage = () => {
   return (
     <div>
       <Header />
+      
       {streamData ? (
-        // <>
-        //   {source === "movie" ? (
-        //     <div className="movie-items" style={{ padding: "10%" }}>
-        //       <Player streamUrl={streamData?.url} />
-        //     </div>
-        //   ) : (
-        //     <div className="movie-items" style={{ padding: "10%" }}>
-        //       {streamData && <Player streamUrl={streamUrl} />}
-        //       {episode ? (
-        //         <Box sx={{ minWidth: 120, backgroundColor: "grey" }}>
-        //           <FormControl fullWidth style={{ backgroundColor: "grey" }}>
-        //             <InputLabel>Seasons</InputLabel>
-        //             <Select
-        //               value={season.toString()}
-        //               label="Season"
-        //               onChange={handleChange}
-        //             >
-        //               {streamData?.seasons.map((item: any, index: number) => (
-        //                 <MenuItem key={item.id} value={index}>
-        //                   {item.name}
-        //                 </MenuItem>
-        //               ))}
-        //             </Select>
-        //           </FormControl>
-        //           <ListItemButton>
-        //             {episode?.episodes?.map((ep: any) => (
-        //               <ListItemText onClick={() => setStreamUrl(ep?.url)}>
-        //                 {ep.name}
-        //               </ListItemText>
-        //             ))}
-        //           </ListItemButton>
-        //         </Box>
-        //       ) : (
-        //         <Loader />
-        //       )}
-        //     </div>
-        //   )}
-            <DisplayInfo
-              name={streamData.name || streamData.title}
-              image={streamData.poster_path}
-              description={streamData.overview}
-              id={streamData.imdbId}
-              release={streamData.first_air_date}
-            />
-        // </>
+        <>
+          {source === "movie" ? (
+            <div className="movie-items" style={{ padding: "10%" }}>
+              <Player streamUrl={streamData?.url} />
+            </div>
+          ) : (
+            <div className="movie-items" style={{ padding: "10%" }}>
+              {streamData && <Player  streamUrl={streamUrl} />}
+              {episode ? (
+                
+                <Box className="card" sx={{ minWidth: 120,  backgroundColor: "rgb(10, 26, 43)", }}>
+                  <FormControl className="card-body" >
+                    
+                    <Select style={{
+
+                      backgroundColor: "white"
+                    }}
+                      value={season.toString()}
+                      
+                      onChange={handleChange}
+                    >
+                      {streamData?.seasons.map((item: any, index: number) => (
+                        <MenuItem key={item.id} value={index}>
+                          {item.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <Grid container >
+                  {episode?.episodes?.map((ep: any) => (
+                    <Grid item xs={12} md={6} lg={2} style={{  margin: "2%" ,backgroundColor: "rgb(37, 59, 83)" , padding:"15px" }} >
+                      <ListItemButton>
+                    
+                    <ListItemText style={{ color:"white"  }} onClick={() => setStreamUrl(ep?.url)}>
+                      {ep.name}
+                    </ListItemText>
+                 
+                </ListItemButton>
+                  </Grid>
+                
+                   ))}
+                   </Grid>
+                </Box>
+              ) : (
+                <Loader />
+              )}
+            </div>
+          )}
+          <DisplayInfo
+            name={streamData.name || streamData.title}
+            image={streamData.poster_path}
+            description={streamData.overview}
+            id={streamData.imdbId}
+            release={streamData.first_air_date}
+          />
+         </>
       ) : (
         <Loader />
       )}
