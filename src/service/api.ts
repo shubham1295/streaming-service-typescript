@@ -3,7 +3,9 @@ import { featureMoviesInterface } from '../interface/featureMoviesInterface';
 import { getMovieInterface } from '../interface/getMovieInterface';
 import { getSearchInterface } from '../interface/getSearchInterface';
 import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterface';
-import { BaseUrl } from '../constant/constant';
+import { BaseUrl, tokenName } from '../constant/constant';
+
+const token = localStorage.getItem(tokenName);
 
 //search api
 export const getSearch = (keyword: string, page?: string | number): Promise<getSearchInterface> => {
@@ -128,6 +130,32 @@ export const signIn = (username: string| null | FormDataEntryValue , password: s
         password
       });
       resolve(res.data.jwt);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export const getFeaturedData = (): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${BaseUrl}admin/getFeatured`,  {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export const getMovieListStreamDB = (): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${BaseUrl}admin/getMoviesList`,  {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
     } catch (err) {
       reject(err);
     }
