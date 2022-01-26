@@ -731,10 +731,6 @@ header .top-search input::-webkit-input-placeholder {
     color: #abb7c4;
 }
 
-header .top-search input {
-    /* background: url(../images/uploads/topsearch.png) no-repeat right 20px center; */
-}
-
 @media (max-width: 991px) {
     .top-search select {
         width: 40% !important;
