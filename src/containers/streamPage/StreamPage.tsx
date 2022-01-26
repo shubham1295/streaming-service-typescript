@@ -94,14 +94,38 @@ export const StreamPage = () => {
           ) : (
             <div className="movie-items" style={{ padding: "10%" }}>
               {streamData && <Player streamUrl={streamUrl} />}
+              <br></br>
+              <Box className="card" style={{ backgroundColor: "rgb(10, 26, 43)", }} >
+                <div className="card-body">
+                  <Grid container  >
+
+                    <Grid item xs={12} md={6} lg={2} style={{ margin: "1.5%", backgroundColor: "rgb(37, 59, 83)", padding: "0px", borderRadius: "5px", }} >
+                      <ListItemButton>
+
+                        <ListItemText style={{ color: "white", textAlign: "center", }} >
+
+                        </ListItemText>
+
+                      </ListItemButton>
+
+
+
+                    </Grid>
+                   
+
+                  </Grid>
+                </div>
+              </Box>
+              <br></br>
               {episode ? (
 
                 <Box className="card" sx={{ minWidth: 120, backgroundColor: "rgb(10, 26, 43)", }}>
                   <FormControl className="card-body" >
 
                     <Select style={{
-
-                      backgroundColor: "white"
+                      color: "white",
+                      fontSize: "1.4rem",
+                      backgroundColor: "rgb(37, 59, 83)"
                     }}
                       value={season.toString()}
 
@@ -114,12 +138,14 @@ export const StreamPage = () => {
                       ))}
                     </Select>
                   </FormControl>
-                  <Grid container >
+                  <Grid container style={{ overflowY:"scroll",
+                      position: "relative",
+                      height: "300px", }}>
                     {episode?.episodes?.map((ep: any) => (
-                      <Grid item xs={12} md={6} lg={2} style={{ margin: "1.5%", backgroundColor: "rgb(37, 59, 83)", padding: "0px", borderRadius: "5px",   }} >
+                      <Grid item xs={12} md={6} lg={2} style={{ margin: "1.5%", backgroundColor: "rgb(37, 59, 83)", padding: "0px", borderRadius: "5px", }} >
                         <ListItemButton>
 
-                          <ListItemText style={{ color: "white", margin:"auto", display:"block",textAlign: "center",   }} onClick={() => setStreamUrl(ep?.url)}>
+                          <ListItemText style={{ color: "white", textAlign: "center", }} onClick={() => setStreamUrl(ep?.url)}>
                             {ep.name}
                           </ListItemText>
 
