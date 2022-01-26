@@ -14,10 +14,12 @@ import { tokenName } from "../../constant/constant";
 import { useState } from "react";
 import { Alert, IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [errorSnackBar, setErrorSnackBar] = useState(false);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -25,6 +27,7 @@ export default function SignIn() {
     try {
       const res = await signIn(data.get("email"), data.get("password"));
       localStorage.setItem(tokenName, res);
+      if (res) navigate("/admin/dashboard");
     } catch (error) {
       setErrorSnackBar(true);
       console.log(error, "error");
