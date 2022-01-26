@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ResultsEntity } from "../../interface/getTrendingMoviesInterface";
 import { Link } from "react-router-dom";
-import "./style.css";
 import { ImageBaseUrl } from "../../constant/constant";
+import "./style.css";
 
 type CarouselProps = {
   movies: ResultsEntity[];

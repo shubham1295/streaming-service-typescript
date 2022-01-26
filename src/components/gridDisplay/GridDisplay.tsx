@@ -1,11 +1,10 @@
 import React from "react";
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowSharp';
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowSharp";
 import { Link } from "react-router-dom";
 import "./style.css";
-import { Typography } from "@mui/material";
+import { ImageBaseUrl } from "../../constant/constant";
 
 const GridDisplay = (props: any) => {
-  const baseUrlPoster = "https://image.tmdb.org/t/p/w185/";
   return (
     <div className="page-single">
       <div className="container">
@@ -26,7 +25,7 @@ const GridDisplay = (props: any) => {
                 >
                   <div className="movie-item-style-1">
                     <img
-                      src={`${baseUrlPoster}/${movie.poster_path}`}
+                      src={`${ImageBaseUrl}/${movie.poster_path}`}
                       alt={movie.title}
                     />
                     <div className="hvr-inner">
