@@ -59,7 +59,7 @@ const GridDisplay = (props: any) => {
                   >
                     <div className="movie-item-style-2">
                       <img
-                        src={`${baseUrlPoster}/${movie.poster_path}`}
+                        src={`${ImageBaseUrl}/${movie.poster_path}`}
                         alt={movie.title}
                         width="154 " height="231 "
                       />
