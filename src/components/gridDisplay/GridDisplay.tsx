@@ -39,16 +39,51 @@ const GridDisplay = (props: any) => {
                         {movie.release_date?.split("-")[0] ||
                           movie.first_air_date?.split("-")[0]}
                       </p>
-
-                      {/* <Typography style={{ marginTop: "-10px" }} variant="h6">
-                        {movie.release_date?.split("-")[0] ||
-                          movie.first_air_date?.split("-")[0]}
-                      </Typography> */}
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
+
+            <div className="row mb-5 mb-xl-8 g-5 g-xl-8 " style={{flexFlow:"wrap"}}>
+            {props.movies.map((movie: any) => (
+                
+                  <div className="col-6 mobile">
+                  <Link
+                    key={movie.id}
+                    to={{
+                      pathname: `/stream/${props.source || movie.media_type}/${
+                        movie.id
+                      }`,
+                    }}
+                  >
+                    <div className="movie-item-style-2">
+                      <img
+                        src={`${ImageBaseUrl}/${movie.poster_path}`}
+                        alt={movie.title}
+                        width="154 " height="231 "
+                      />
+                      
+                      <div className="mv-item-infor">
+                        <h6>
+                          <a href="/">{movie.title || movie.name}</a>
+                        </h6>
+                        <p>
+                          {movie.release_date?.split("-")[0] ||
+                            movie.first_air_date?.split("-")[0]}
+                        </p>
+                      </div>
+                    </div>
+
+                    </Link>
+                  </div>
+
+              ))}
+                  
+
+              </div>
+
+
           </div>
           <div className="col-md-4 col-sm-12 col-xs-12">
             <div className="sidebar">
