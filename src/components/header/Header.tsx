@@ -27,12 +27,8 @@ const Header = (props: any) => {
           </div>
         </nav>
 
-        <div className="top-search">
-          <form style={{
-                      width: "70%",
-                      margin: "0 auto",
-                      display: "flex",
-                    }}>
+        <div className="top-search" style={{margin:"15px"}}>
+          <form style={{width: "100%", display: "flex",}}>
             <input
               type="text"
               placeholder="Search for a movie or a TV Show. "
@@ -42,7 +38,7 @@ const Header = (props: any) => {
               Search
             </Button> */}
             <IconButton aria-label="search" size="large" onClick={() => handleGotoSearch(searchKeyword)} >
-              <SearchIcon style={{ color: "white", transform: "scale(1.8)"}} />
+              <SearchIcon style={{ color: "white", transform: "scale(1.8)" }} />
             </IconButton>
           </form>
         </div>
