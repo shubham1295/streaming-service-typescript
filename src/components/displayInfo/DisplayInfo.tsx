@@ -1,9 +1,7 @@
-
-import { ReactChild, ReactFragment, ReactPortal } from "react";
+import { ImageBaseUrl } from "../../constant/constant";
 import "./style.css";
 
 const DisplayInfo = (props: any) => {
-  const baseUrlPoster = "https://image.tmdb.org/t/p/w185/";
   return (
     <div className="movie-items">
       <div id="main-container">
@@ -16,7 +14,7 @@ const DisplayInfo = (props: any) => {
 
               <div className="row">
                 <div className="col-2">
-                  <img src={`${baseUrlPoster}${props.image}`} alt={props.name} />
+                  <img src={`${ImageBaseUrl}${props.image}`} alt={props.name} />
                 </div>
                 <div className="col-10">
                   <span ><h1>{props.name}</h1></span>
@@ -36,7 +34,7 @@ const DisplayInfo = (props: any) => {
           }}>
             <div className="card-body">
 
-              <img src={`${baseUrlPoster}${props.image}`} alt={props.name} />
+              <img src={`${ImageBaseUrl}${props.image}`} alt={props.name} />
 
               <div className="col-10">
                   <span ><h1>{props.name}</h1></span>
