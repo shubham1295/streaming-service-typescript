@@ -69,8 +69,8 @@ const Carousel = ({ movies, title }: CarouselProps) => {
                 image={`${ImageBaseUrl}/${movie.poster_path}`}
               />
             </Card>
-            <div className="mv-item-infor" style={{ textAlign: "center" }}>
-              <h6>
+            <div className="mv-item-infor" style={{ textAlign: "center", paddingTop: "1%" }}>
+              <h6 >
                 <a href="/" >{movie.title || movie.name}</a>
               </h6>
               <p>
