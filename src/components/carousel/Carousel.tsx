@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ResultsEntity } from "../../interface/getTrendingMoviesInterface";
 import { Link } from "react-router-dom";
-import { ImageBaseUrl } from "../../constant/constant";
+import { CarouselImageBaseUrl } from "../../constant/constant";
 import "./style.css";
 
 type CarouselProps = {
@@ -66,7 +66,7 @@ const Carousel = ({ movies, title }: CarouselProps) => {
               <CardMedia
                 style={{ height: "400px", width: "270px", margin: "auto" }}
                 component="img"
-                image={`${ImageBaseUrl}/${movie.poster_path}`}
+                image={`${CarouselImageBaseUrl}/${movie.poster_path}`}
               />
             </Card>
             <div className="mv-item-infor" style={{ textAlign: "center", paddingTop: "1%" }}>
