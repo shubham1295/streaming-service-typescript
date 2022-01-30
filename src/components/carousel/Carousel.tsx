@@ -27,7 +27,6 @@ const Carousel = ({ movies, title }: CarouselProps) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
           dots: true,
         },
       },
@@ -37,6 +36,7 @@ const Carousel = ({ movies, title }: CarouselProps) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          dots: true,
         },
       },
       {
@@ -44,12 +44,13 @@ const Carousel = ({ movies, title }: CarouselProps) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: true,
         },
       },
     ],
   };
   return (
-    <div style={{ padding: "2% 8% 8% 8%", overflow: 'hidden', }}>
+    <div style={{ padding: "2% 8% 2% 8%", overflow: 'hidden', }}>
       <Slider {...settings}>
         {movies.map((movie: any) => (
           <Link
@@ -68,9 +69,9 @@ const Carousel = ({ movies, title }: CarouselProps) => {
                 image={`${ImageBaseUrl}/${movie.poster_path}`}
               />
             </Card>
-            <div className="mv-item-infor">
+            <div className="mv-item-infor" style={{ textAlign: "center" }}>
               <h6>
-                <a href="/">{movie.title || movie.name}</a>
+                <a href="/" >{movie.title || movie.name}</a>
               </h6>
               <p>
                 {movie.release_date?.split("-")[0] ||

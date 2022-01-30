@@ -37,7 +37,7 @@ const Header = (props: any) => {
             {/* <Button type="submit" size="large" onClick={() => handleGotoSearch(searchKeyword)}>
               Search
             </Button> */}
-            <IconButton aria-label="search" size="large" onClick={() => handleGotoSearch(searchKeyword)} >
+            <IconButton type="submit" aria-label="search" size="large" onClick={() => handleGotoSearch(searchKeyword)} >
               <SearchIcon style={{ color: "white", transform: "scale(1.8)" }} />
             </IconButton>
           </form>
