@@ -80,6 +80,7 @@ export const StreamPage = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageTitle]);
+
   return (
     <div>
       <Header />
@@ -200,6 +201,7 @@ export const StreamPage = () => {
                       value={season.toString()}
                       onChange={handleChange}
                     >
+                      {/* Season Iteration */}
                       {streamData?.seasons.map((item: any, index: number) => (
                         <MenuItem
                           key={item.id}
@@ -219,6 +221,7 @@ export const StreamPage = () => {
                       height: "250px",
                     }}
                   >
+                    {/* Episode Iteration */}
                     {episode?.episodes?.map((ep: any) => (
                       <Grid
                         item
@@ -238,7 +241,6 @@ export const StreamPage = () => {
                             onClick={() => {
                               setStreamUrl(ep?.url[0]);
                               setServerUrls(ep?.url);
-                              console.log(ep, "epi");
                             }}
                           >
                             {ep.name}
@@ -258,7 +260,7 @@ export const StreamPage = () => {
             image={streamData.poster_path}
             description={streamData.overview}
             id={streamData.imdbId}
-            release={streamData.first_air_date}
+            release={streamData.first_air_date || streamData.release_date}
           />
         </>
       ) : (
