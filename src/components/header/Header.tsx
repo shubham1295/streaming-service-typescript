@@ -29,7 +29,7 @@ const Header = (props: any) => {
         </nav>
 
         <div className="top-search" style={{ margin: "15px" }}>
-          <form style={{ width: "100%", display: "flex" }}>
+          <form style={{ width: "100%", display: "flex" }} onSubmit={e => e.preventDefault()}>
             <input
               type="text"
               placeholder="Search for a movie or a TV Show. "
