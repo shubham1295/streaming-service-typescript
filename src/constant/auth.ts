@@ -17,6 +17,5 @@ export const authUser = () =>  {
         }
         return true;
     }
-    return false;
-  
+    return false;  
 }
