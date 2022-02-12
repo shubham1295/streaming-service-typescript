@@ -8,8 +8,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 
-export default function BasicTable({ rows, headers, title }: any) {
+type tableProps = {
+  rows: any;
+  headers: string[];
+  title: string;
+  handleChange?: any;
+  buttonName?: string;
+};
+
+export default function BasicTable({
+  rows,
+  headers,
+  title,
+  buttonName,
+  handleChange,
+}: tableProps) {
   const rowKeys = Object.keys(rows[0]);
+
   return (
     <>
       <Typography variant="h2">{title}</Typography>
@@ -36,6 +51,11 @@ export default function BasicTable({ rows, headers, title }: any) {
                     {row[key]}
                   </TableCell>
                 ))}
+                <TableCell key={index} align={"center"}>
+                  <button onClick={(e) => handleChange(row)}>
+                    {buttonName ? buttonName : "Edit"}
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

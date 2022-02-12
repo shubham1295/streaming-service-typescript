@@ -161,3 +161,31 @@ export const getMovieListStreamDB = (): Promise<any> => {
     }
   });
 }
+
+//update Feature List (ADD) 
+export const addFeaturedList = (data: any): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(`${BaseUrl}admin/updateFeatured`, data, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+//update Feature List (DELETE)
+export const deleteFeaturedList = (data: any): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.delete(`${BaseUrl}admin/updateFeatured`, {
+        headers: { Authorization: `Bearer ${token}` }, data
+    } );
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
