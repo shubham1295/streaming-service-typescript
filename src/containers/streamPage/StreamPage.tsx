@@ -24,7 +24,11 @@ import Loader from "../../components/loader/Loader";
 import GridDisplay from "../../components/gridDisplay/GridDisplay";
 import DisplayInfo from "../../components/displayInfo/DisplayInfo";
 
+import { GoogleAnalyticsInit } from "../../utils/GoogleAnalyticsInit";
+
 export const StreamPage = () => {
+
+
   const { id, source } = useParams();
   const [streamData, setStreamData] = useState(null as any);
   const [season, setSeason] = useState(0);
@@ -74,6 +78,9 @@ export const StreamPage = () => {
   };
 
   useEffect(() => {
+
+    GoogleAnalyticsInit();
+
     if (source === "tv") fetchEpisode(id as string, season + 1);
     getStreamData();
     document.title = pageTitle;
