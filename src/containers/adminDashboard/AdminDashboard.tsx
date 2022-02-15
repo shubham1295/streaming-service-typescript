@@ -1,8 +1,7 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MuiAppBar from "../../components/mui-Appbar/MuiAppBar";
 import BasicTable from "../../components/table/Table";
-import { authUser } from "../../constant/auth";
 import { useForm } from "react-hook-form";
 import {
   featuredHeaders,
@@ -10,7 +9,9 @@ import {
 } from "../../constant/constant";
 import {
   addFeaturedList,
+  addMovieToStreamDB,
   deleteFeaturedList,
+  deleteMovieFromStreamDB,
   getFeaturedData,
   getMovieListStreamDB,
 } from "../../service/api";
@@ -18,6 +19,14 @@ import {
 const AdminDashboard = () => {
   const [featuredData, setFeaturedData] = useState([{}]);
   const [movieListStream, setMovieListStream] = useState([{}]);
+  const [streamSbData, setStreamSbData] = useState({
+    id: "",
+    url: "",
+    imdbid: "",
+    movie_name: "",
+  });
+  //StreamDB modal
+  const [open, setOpen] = useState(false);
 
   const fetchFeaturedData = async () => {
     const res1 = await getMovieListStreamDB();
@@ -36,15 +45,48 @@ const AdminDashboard = () => {
     console.log(res);
   };
 
+  //Add Feature Data
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data: any) => {
+  const onSubmitAddFeatureData = async (data: any) => {
     console.log(data);
     console.log(errors, "ee");
     const res = await addFeaturedList(data);
+    console.log(res);
+  };
+
+  //Add StreamSB Data
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    formState: { errors: errors2 },
+  } = useForm({
+    mode: "onBlur",
+  });
+
+  const onSubmitHandleStreamSBAdd = async (data: any) => {
+    console.log(data);
+    console.log(errors2, "ee");
+    const res = await addMovieToStreamDB(data);
+    console.log(res);
+  };
+
+  //Edit Stream SB Data Modal
+  const handleEditStreamSb = (data: any, event: any) => {
+    event.preventDefault();
+    console.log("edit", data);
+    setStreamSbData(data);
+    setOpen(true);
+  };
+
+  //Delete Stream SB Data
+  const handleDeleteStreamSb = async (data: any) => {
+    console.log("delete", streamSbData);
+    const res = await deleteMovieFromStreamDB({ id: streamSbData?.id });
+    setOpen(false);
     console.log(res);
   };
 
@@ -59,7 +101,7 @@ const AdminDashboard = () => {
         title={"Featured Data"}
       />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitAddFeatureData)}>
         <input
           type="text"
           placeholder="imdbId"
@@ -81,10 +123,57 @@ const AdminDashboard = () => {
       </form>
 
       <BasicTable
+        handleChange={handleEditStreamSb}
         rows={movieListStream}
         headers={movieListStreamDBHeaders}
         title={"Movies from Stream SB"}
       />
+
+      <form onSubmit={handleSubmit2(onSubmitHandleStreamSBAdd)}>
+        <input
+          type="text"
+          placeholder="url"
+          {...register2("url", { required: true })}
+        />
+        <input
+          type="text"
+          placeholder="imdbid"
+          {...register2("imdbid", { required: true })}
+        />
+        <input
+          type="text"
+          placeholder="movie_name"
+          {...register2("movie_name", { required: true })}
+        />
+        <input type="submit" />
+      </form>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          style={{
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            backgroundColor: "#fff",
+            border: "2px solid #000",
+            padding: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Update/ Delete StreamSb data
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+          <Button onClick={handleDeleteStreamSb}>Delete</Button>
+        </Box>
+      </Modal>
     </div>
   );
 };

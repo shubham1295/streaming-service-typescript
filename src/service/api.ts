@@ -189,3 +189,45 @@ export const deleteFeaturedList = (data: any): Promise<any> => {
     }
   });
 }
+
+///Add Data to StreamDB
+export const addMovieToStreamDB = (data: any): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(`${BaseUrl}admin/updateMovies`, data, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+//Delete Data from StreamDB
+export const deleteMovieFromStreamDB = (data: any): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.delete(`${BaseUrl}admin/updateMovies`, {
+        headers: { Authorization: `Bearer ${token}` }, data
+    } );
+      resolve(res); 
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+//Update Data in StreamDB
+export const updateMovieInStreamDB = (data: any): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.put(`${BaseUrl}admin/updateMovies`, data, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
