@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { featureMoviesInterface } from '../interface/featureMoviesInterface';
-import { getMovieInterface } from '../interface/getMovieInterface';
+import { getMovieInterface } from '../interface/movieInterface';
 import { getSearchInterface } from '../interface/getSearchInterface';
-import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterface';
+import { getTrendigMoviesInterface } from '../interface/trendingMoviesInterface';
 import { BaseUrl } from '../constant/constant';
 
 //search api
