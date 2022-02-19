@@ -14,6 +14,7 @@ import {
   deleteMovieFromStreamDB,
   getFeaturedData,
   getMovieListStreamDB,
+  updateMovieInStreamDB,
 } from "../../service/api";
 
 const AdminDashboard = () => {
@@ -67,6 +68,15 @@ const AdminDashboard = () => {
     mode: "onBlur",
   });
 
+  //edit StreamDB data
+  const {
+    register: register3,
+    handleSubmit: handleSubmit3,
+    formState: { errors: errors3 },
+  } = useForm({
+    mode: "onBlur",
+  });
+
   const onSubmitHandleStreamSBAdd = async (data: any) => {
     console.log(data);
     console.log(errors2, "ee");
@@ -76,10 +86,9 @@ const AdminDashboard = () => {
 
   //Edit Stream SB Data Modal
   const handleEditStreamSb = (data: any, event: any) => {
-    event.preventDefault();
-    console.log("edit", data);
     setStreamSbData(data);
     setOpen(true);
+    console.log("setStreamSbData", streamSbData);
   };
 
   //Delete Stream SB Data
@@ -90,6 +99,12 @@ const AdminDashboard = () => {
     console.log(res);
   };
 
+  const handleEdit = async (data: any) => {
+    console.log(data, "data");
+    const res = await updateMovieInStreamDB(data);
+    console.log(res, "res");
+    setOpen(false);
+  };
   return (
     <div>
       <MuiAppBar />
@@ -171,6 +186,33 @@ const AdminDashboard = () => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
+          <form onSubmit={handleSubmit3(handleEdit)}>
+            <input
+              type="text"
+              defaultValue={streamSbData.id}
+              placeholder="id"
+              {...register3("id", { required: true })}
+            />
+            <input
+              type="text"
+              defaultValue={streamSbData.imdbid}
+              placeholder="imdbid"
+              {...register3("imdbid", { required: true })}
+            />
+            <input
+              type="text"
+              defaultValue={streamSbData.url}
+              placeholder="url"
+              {...register3("url", { required: true })}
+            />
+            <input
+              type="text"
+              defaultValue={streamSbData.movie_name}
+              placeholder="movie_name"
+              {...register3("movie_name", { required: true })}
+            />
+            <input type="submit" />
+          </form>
           <Button onClick={handleDeleteStreamSb}>Delete</Button>
         </Box>
       </Modal>
