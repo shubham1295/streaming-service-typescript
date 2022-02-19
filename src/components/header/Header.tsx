@@ -1,17 +1,18 @@
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo1.png";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import "./style.css";
 
 const Header = (props: any) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
   const handleGotoSearch = (searchKeyword: string) => {
-    searchKeyword.length > 0 && navigate(`/search/${searchKeyword}/page=1`);
+    searchKeyword.length > 0 &&
+      navigate(`/search?query=${searchKeyword}&page=1`);
   };
-
+  console.log(searchKeyword);
   return (
     <header className="ht-header">
       <div className="container">
@@ -27,12 +28,8 @@ const Header = (props: any) => {
           </div>
         </nav>
 
-        <div className="top-search">
-          <form style={{
-                      width: "70%",
-                      margin: "0 auto",
-                      display: "flex",
-                    }}>
+        <div className="top-search" style={{ margin: "15px" }}>
+          <form style={{ width: "100%", display: "flex" }} onSubmit={e => e.preventDefault()}>
             <input
               type="text"
               placeholder="Search for a movie or a TV Show. "
@@ -41,8 +38,13 @@ const Header = (props: any) => {
             {/* <Button type="submit" size="large" onClick={() => handleGotoSearch(searchKeyword)}>
               Search
             </Button> */}
-            <IconButton aria-label="search" size="large">
-              <SearchIcon style={{ color: "white", transform: "scale(1.8)"}} />
+            <IconButton
+              type="submit"
+              aria-label="search"
+              size="large"
+              onClick={() => handleGotoSearch(searchKeyword)}
+            >
+              <SearchIcon style={{ color: "white", transform: "scale(1.8)" }} />
             </IconButton>
           </form>
         </div>

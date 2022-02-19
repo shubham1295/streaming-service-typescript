@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { featureMoviesInterface } from '../interface/featureMoviesInterface';
-import { getMovieInterface } from '../interface/getMovieInterface';
-import { getSearchInterface } from '../interface/getSearchInterface';
-import { getTrendigMoviesInterface } from '../interface/getTrendingMoviesInterface';
+import { movieInterface } from '../interface/movieInterface';
+import { searchInterface } from '../interface/searchInterface';
+import { trendingMoviesInterface } from '../interface/trendingMoviesInterface';
 import { BaseUrl, tokenName } from '../constant/constant';
 
 const token = localStorage.getItem(tokenName);
 
 //search api
-export const getSearch = (keyword: string, page?: string | number): Promise<getSearchInterface> => {
+export const getSearch = (keyword: string, page?: string | number): Promise<searchInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(
@@ -22,7 +22,7 @@ export const getSearch = (keyword: string, page?: string | number): Promise<getS
 };
 
 //get movie api
-export const getMovie = (id: string | number): Promise<getMovieInterface> => {
+export const getMovie = (id: string | number): Promise<movieInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(`${BaseUrl}movie/getMovie/${id}`);
@@ -36,7 +36,7 @@ export const getMovie = (id: string | number): Promise<getMovieInterface> => {
 // trending api
 export const getTrendingMovies = (
   page?: number
-): Promise<getTrendigMoviesInterface> => {
+): Promise<trendingMoviesInterface> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(`${BaseUrl}movie/trendingMovies?page=${page || 1}`);
@@ -102,7 +102,7 @@ export const getTrendingTvSeries = (
 export const getSimilarMovies = (id: string | number): Promise<any> => {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.get(`${BaseUrl}movie/similarMovies/${id}}`);
+      const res = await axios.get(`${BaseUrl}movie/similarMovies/${id}`);
       resolve(res.data);
     } catch (err) {
       reject(err);

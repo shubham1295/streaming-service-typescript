@@ -1,6 +1,6 @@
-import { Pagination, Stack, withStyles } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import Footer from "../../components/footer/Footer";
 import GridDisplay from "../../components/gridDisplay/GridDisplay";
 import Header from "../../components/header/Header";
@@ -8,6 +8,8 @@ import Loader from "../../components/loader/Loader";
 import { getSearch } from "../../service/api";
 import { makeStyles } from "@mui/styles";
 import NotFound from "../../components/notFound/NotFound";
+import queryString from "query-string";
+import { GoogleAnalyticsInit } from "../../utils/GoogleAnalyticsInit";
 
 const useStyles = makeStyles(() => ({
   ul: {
@@ -20,8 +22,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const SearchResult = () => {
+
   const navigate = useNavigate();
-  const { keyword, page } = useParams();
+  const loc = useLocation();
+  const query = queryString.parse(loc.search);
+  const keyword = query.query;
+  const page = query.page;
   const [search, setSearch] = useState([] as any);
   const [pg, setPg] = useState(Number(page));
   const [totalPages, setTotalPages] = useState(1);
@@ -38,6 +44,9 @@ export const SearchResult = () => {
     }
   };
   useEffect(() => {
+
+    GoogleAnalyticsInit();
+
     fetchSerachData(pg);
     document.title = "Results for " + keyword;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +61,7 @@ export const SearchResult = () => {
             <NotFound />
           ) : (
             <>
-              <div style={{ paddingTop: "10%" }} className="movie-items">
+              <div style={{ paddingTop: "2%" }} className="movie-items">
                 <GridDisplay
                   title={`Search Results for ${keyword}`}
                   movies={search}
@@ -68,7 +77,7 @@ export const SearchResult = () => {
                   classes={{ ul: classes.ul }}
                   onChange={(event, p) => {
                     setPg(p);
-                    navigate(`/search/${keyword}/page=${p}`);
+                    navigate(`/search?query=${keyword}&page=${p}`);
                   }}
                 />
               </Stack>

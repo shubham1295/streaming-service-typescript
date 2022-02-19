@@ -18,7 +18,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/search/:keyword/page=:page" element={<SearchResult />} />
+      <Route path="/search" element={<SearchResult />} />
       <Route path="/stream/:id" element={<StreamPage />} />
       <Route path="/stream/:source/:id" element={<StreamPage />} />
       <Route
