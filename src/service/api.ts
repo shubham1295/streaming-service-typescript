@@ -231,3 +231,17 @@ export const updateMovieInStreamDB = (data: any): Promise<any> => {
     }
   });
 }
+
+///moveToDb (GET)
+export const moveToDb = (): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${BaseUrl}admin/moveToDb`,  {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+      resolve(res);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}

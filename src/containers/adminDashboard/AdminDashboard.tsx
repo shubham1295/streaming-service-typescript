@@ -14,6 +14,7 @@ import {
   deleteMovieFromStreamDB,
   getFeaturedData,
   getMovieListStreamDB,
+  moveToDb,
   updateMovieInStreamDB,
 } from "../../service/api";
 
@@ -39,6 +40,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchFeaturedData();
   }, []);
+
+  const handleMoveToDb = async () => {
+    const res = await moveToDb();
+    console.log(res);
+  };
 
   const handleFeatureDelete = async (data: any) => {
     const { id, type } = data;
@@ -162,6 +168,7 @@ const AdminDashboard = () => {
         />
         <input type="submit" />
       </form>
+      <Button onClick={handleMoveToDb}>MOVE TO DB</Button>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -182,9 +189,6 @@ const AdminDashboard = () => {
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Update/ Delete StreamSb data
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
           <form onSubmit={handleSubmit3(handleEdit)}>
             <input
